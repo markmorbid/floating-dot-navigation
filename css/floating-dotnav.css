@@ -1,0 +1,501 @@
+/* //// Start Floating dotnav styles //// */
+/* Root variables */
+:root #floating_menu {
+    --dotnav-font: var(--titlefont, inherit);
+    --dotnav-size: 33px;
+    --dotnav-size-font: 16px;
+    --dotnav-border-width: 1px;
+    --dotnav-tooltip-border: solid;
+    --dotnav-arrow-width: 6px;
+    --dotnav-arrow-border: 6px;
+    --dotnav-space: 7px;
+    --dotnav-padding: 12px;
+    --dotnav-outline-size: 3;
+    --dotnav-outline-color-hover: var(--lightbg2, #ffffff);
+    --dotnav-outline-color: var(--dotnav-maincolor, var(--wp-admin-theme-color));
+
+    --dotnav-border-color: var(--borders-color, #2b2b2b);
+    --dotnav-transition-time: 500ms;
+    --dotnav-border-style: solid;
+    --dotnav-lightbg: var(--lightbg2, #ffffff);
+    --dotnav-lightbg-transp: var(--lightbg-transp-75, #ffffff9f);
+    --dotnav-maincolor: var(--maincolor, var(--wp-admin-theme-color));
+    --dotnav-maincolortext: var(--maincolortext, black);
+    --dotnav-altcolor: var(--altcolor, var(--wp-adminbar-accent));
+    --dotnav-trail: solid;
+    --dotnav-border-radius: 100px;
+
+    --dotnav-border-radius: var(--btn-border-radius, var(--border-radius), 5px);
+    --dotnav-tooltip-border-radius: var(--btn-border-radius, var(--border-radius), 5px);
+    --dotnav-darkbg: #0f0f0f;
+}
+
+/* Before element for border */
+#floating_menu:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 50%;
+    transform: translatex(-50%) translatex(2px);
+    z-index: -1;
+    height: calc(100% - var(--dotnav-space) * 2);
+    width: calc(var(--dotnav-border-width)*2);
+    display: var(--dotnav-trail);
+    background: var(--dotnav-border-color);
+}
+
+/* Floating menu */
+#floating_menu {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    margin: 0;
+    position: fixed;
+    right: 10px;
+    top: 50%;
+    transform: translatez(0) translatey(-50%);
+    transition: opacity var(--dotnav-transition-time) ease, right var(--dotnav-transition-time) ease;
+    will-change: right, opacity;
+
+    z-index: 9999 !important;
+    background: none;
+    padding: 0;
+    gap: 0px;
+}
+
+div#floating_menu.services {
+    gap: 0;
+}
+
+div#floating_menu.services .tooltip {
+    font-size: 12px !important;
+    padding: 4px 13px !important;
+    letter-spacing: 0;
+}
+
+/* Menu items */
+#floating_menu a {
+    color: var(--dotnav-lightbg);
+    cursor: pointer;
+    font-family: var(--dotnav-font);
+    margin-right: calc(var(--dotnav-space) / 2);
+    margin-right: 0;
+    text-decoration: none;
+    background-color: var(--dotnav-darkbg);
+    border: calc(var(--dotnav-border-width)) solid var(--dotnav-border-color);
+    border-radius: var(--dotnav-border-radius);
+    display: block;
+    height: var(--dotnav-size);
+    width: var(--dotnav-size);
+    line-height: var(--dotnav-size);
+    margin-bottom: var(--dotnav-space);
+    position: relative;
+    text-align: center;
+    transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    background-clip: border-box;
+}
+
+#floating_menu a.active {
+    background-color: var(--dotnav-darkbg) !important;
+    box-shadow: inset 0 0 0 calc(var(--dotnav-border-width) + 1px * var(--dotnav-outline-size)) var(--dotnav-outline-color) !important;
+}
+
+#floating_menu a:hover,
+#floating_menu a.active:hover {
+    background-color: var(--dotnav-maincolor) !important;
+    box-shadow: inset 0 0 0 calc(var(--dotnav-border-width) + 1px * var(--dotnav-outline-size)) var(--dotnav-outline-color-hover) !important;
+    pointer-events: all !important;
+    background-clip: border-box;
+}
+
+#floating_menu .dots.active {
+    background-color: var(--dotnav-maincolor);
+    border-color: var(--dotnav-border-color);
+}
+
+/* Tooltip appearance */
+#floating_menu span.tooltip {
+    background-color: var(--dotnav-maincolor);
+    border-color: var(--dotnav-border-color);
+    border-radius: var(--dotnav-tooltip-border-radius);
+    border-style: var(--dotnav-tooltip-border);
+    border-width: var(--dotnav-border-width);
+    color: var(--dotnav-maincolortext);
+    font-size: var(--dotnav-size-font);
+    font-weight: 500;
+    /* letter-spacing: 0.028em; */
+    opacity: 0;
+    padding: calc(var(--dotnav-padding)/2) calc(var(--dotnav-padding)*1);
+    pointer-events: none;
+    position: absolute;
+    right: calc(var(--dotnav-size) + var(--dotnav-padding)*2);
+    text-transform: uppercase;
+    top: 50%;
+    transform: translatey(-50%) translateZ(0);
+    transition: right var(--dotnav-transition-time), opacity var(--dotnav-transition-time), background var(--dotnav-transition-time);
+    white-space: nowrap;
+    z-index: -1;
+    font-family: var(--dotnav-font);
+    will-change: right, opacity, background;
+    line-height: var(--dotnav-size);
+    animation: hideTooltip 0.4s forward;
+
+}
+
+#floating_menu a.active span.tooltip {
+    background: var(--dotnav-darkbg);
+    border-color: var(--dotnav-border-color);
+    color: var(--dotnav-lightbg);
+    opacity: 1 !important;
+    right: calc(var(--dotnav-size) + 5px);
+    z-index: -2 !important;
+}
+
+/* Tooltip arrow */
+#floating_menu a span.tooltip:before,
+#floating_menu a span.tooltip:after {
+    position: absolute;
+    transform: rotate(0deg) translateY(-50%) translateX(0px) translateZ(0);
+    width: 0;
+    content: "";
+    height: 0;
+    transition: border-color var(--dotnav-transition-time);
+    will-change: border-color;
+    border-style: solid;
+    margin-bottom: calc(var(--dotnav-border-width) + var(--dotnav-border-width));
+    bottom: calc(var(--dotnav-padding)/2);
+    box-sizing: border-box;
+    background-clip: border-box;
+    pointer-events: none;
+    transition-delay: 0s;
+}
+
+#floating_menu a span.tooltip:after {
+    border-color: transparent transparent transparent var(--dotnav-darkbg);
+    border-width: var(--dotnav-arrow-width) 0 var(--dotnav-arrow-width) var(--dotnav-arrow-width);
+    left: 100%;
+}
+
+#floating_menu a span.tooltip:before {
+    border-color: transparent transparent transparent var(--dotnav-maincolor);
+    border-width: var(--dotnav-arrow-width) 0 var(--dotnav-arrow-width) var(--dotnav-arrow-width);
+    left: calc(100% - var(--dotnav-border-width));
+    z-index: 1;
+}
+
+#floating_menu a:hover span.tooltip,
+#floating_menu a.active span.tooltip {
+    opacity: 1;
+    right: calc(var(--dotnav-size) + var(--dotnav-padding));
+    background-clip: border-box;
+    box-sizing: border-box;
+}
+
+#floating_menu a.active span.tooltip:before {
+    border-color: transparent transparent transparent var(--dotnav-darkbg);
+}
+
+#floating_menu a.active span.tooltip:after {
+    border-color: transparent transparent transparent var(--dotnav-border-color);
+}
+
+/* Hide button */
+#floating_menu .hide-button {
+    position: fixed;
+    bottom: calc(var(--dotnav-space) - var(--dotnav-padding) - var(--dotnav-size)*1.4 + 2px);
+    width: calc(var(--dotnav-size)*1);
+    height: calc(var(--dotnav-size)*1);
+    right: var(--dotnav-space);
+    right: calc(var(--dotnav-space) - var(--dotnav-space));
+    background-color: var(--dotnav-maincolor);
+    color: var(--dotnav-darkbg);
+    border: var(--dotnav-border-width) solid;
+    border-radius: var(--dotnav-border-radius);
+    padding: 0px;
+    cursor: pointer;
+    z-index: 9999;
+    border-color: var(--dotnav-border-color);
+    transition: height 300ms ease 0s, border-radius 400ms linear, width 300ms ease 0s, bottom 300ms ease 0s, background 300ms ease, right 300ms ease 0s;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+#floating_menu .hide-button svg {
+    width: 1.2rem;
+    aspect-ratio: 1;
+    height: 1.2rem;
+}
+
+#floating_menu .hide-button.active {
+    bottom: 50%;
+}
+
+#floating_menu .hide-button:hover,
+#floating_menu .hide-button.active {
+    background: var(--dotnav-darkbg);
+    color: var(--dotnav-maincolor);
+}
+
+#floating_menu .hide-button.active:hover {
+    background: var(--dotnav-maincolor);
+    color: var(--dotnav-maincolortext);
+}
+
+/* Menu hiding styles */
+#floating_menu.hidenav.hide {
+    right: -350px;
+}
+
+#floating_menu.hide,
+#floating_menu.hidenav {
+    right: -300px;
+}
+
+#floating_menu.hidenav:not(.hide) .hide-button {
+    width: calc(var(--dotnav-size) * 1.26);
+    height: calc(var(--dotnav-size) * 1.26);
+    margin-right: calc(var(--dotnav-border-width) + 3px * -1);
+    border-radius: var(--dotnav-tooltip-border-radius) 0 0 var(--dotnav-tooltip-border-radius);
+    box-shadow: inset 0 0 0 calc(var(--dotnav-border-width) - 1px) var(--dotnav-darkbg) !important;
+}
+
+#floating_menu.hidenav button.hide-button.active {
+    right: 300px;
+    bottom: 50%;
+    transition: width 300ms ease 0.2s, height 300ms ease 0.2s, bottom 300ms ease 0.1s, background 300ms ease, right 300ms ease 0.5s;
+}
+
+#floating_menu.hidenav button.hide-button.active:hover {
+    background: var(--dotnav-maincolor);
+}
+
+#top #floating_menu.hidenav button.hide-button.active svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: white;
+    transition: color 300ms, width 300ms, height 300ms;
+}
+
+#top #floating_menu.hidenav button.hide-button.active:hover svg {
+    color: initial;
+}
+
+div#floating_menu.hidetop {
+    right: -300px;
+}
+
+/* Media queries */
+@media only screen and (max-width: 480px) {
+    :root #floating_menu {
+        --dotnav-space: 6px;
+        --dotnav-size: 23px;
+        --dotnav-padding: 10px;
+    }
+
+    #floating_menu {
+        right: 5px;
+    }
+
+    #floating_menu a span.tooltip {
+        border-width: 1px;
+        letter-spacing: 0;
+    }
+
+    #floating_menu .hide-button {
+        margin-bottom: -1px;
+    }
+}
+
+
+
+/* //// End Floating dotnav styles //// */
+
+
+@media only screen and (max-width: 767px) {
+    :root #floating_menu {
+        --dotnav-space: 5px;
+    }
+
+    #floating_menu:before {
+        right: calc(50% - var(--dotnav-border-width)*2);
+        transform: translatex(calc(50% - var(--dotnav-border-width)*2));
+        z-index: -1;
+        height: calc(100% - var(--dotnav-space)*2);
+        width: var(--dotnav-border-width);
+    }
+}
+
+@media only screen and (max-width: 370px) {
+
+
+    :root #floating_menu {
+        --dotnav-space: 5px;
+        --dotnav-size: 21px;
+        --dotnav-size-font: 12px;
+        --dotnav-border-width: 1px;
+        --dotnav-arrow-width: 3px;
+        --dotnav-arrow-border: 3px;
+        --dotnav-padding: 8px;
+    }
+
+    #floating_menu a span.tooltip {
+        border-width: 1px;
+        animation: hideTooltip 0.4s forward;
+        letter-spacing: 0;
+    }
+}
+
+
+
+@media only screen and (max-width: 480px) {
+    :root #floating_menu {
+        --dotnav-space: 6px;
+        --dotnav-size: 25px;
+        --dotnav-size-font: 13px;
+        --dotnav-border-width: 1px;
+        --dotnav-arrow-width: 4px;
+        --dotnav-arrow-border: 4px;
+        --dotnav-padding: 6px;
+        --dotnav-trail: none;
+        --dotnav-tooltip-border-radius: 5px;
+    }
+
+    #floating_menu a span.tooltip {
+        border-width: 1px;
+        animation: hideTooltip 0.4s forwards;
+        letter-spacing: 0;
+    }
+
+    #floating_menu a.active:not(:hover) span.tooltip {
+        /* Initial state of the element */
+        opacity: 1;
+        animation: hideAfterInactivity 3s forwards;
+    }
+
+    /* Apply the animation when the element is not being hovered */
+    #floating_menu a.active:hover span.tooltip {
+        animation: showOnHover 3s forwards;
+    }
+
+    /* Define the animation */
+    @keyframes hideAfterInactivity {
+        0% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0 !important;
+            visibility: hidden;
+            /* Ensure the element is hidden after the animation */
+        }
+    }
+
+    /* Define the animation */
+    @keyframes showOnHover {
+        0% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1 !important;
+            visibility: visible;
+            /* Ensure the element is hidden after the animation */
+        }
+    }
+}
+#floating_menu.hidenav button.hide-button.active svg line[x1="18"], #floating_menu.hidenav button.hide-button.active svg line[x1="6"]{
+    transform: rotate(45deg);
+}
+
+#floating_menu button.hide-button svg line, #floating_menu button.hide-button svg {
+    transition: transform ease 300ms, scale ease 300ms;
+        transform-origin: center;
+pointer-events: none;
+}
+#floating_menu button.hide-button svg line[x1="18"]{
+    transition-delay: .5s;
+}
+#floating_menu button.hide-button svg line[x1="6"]{
+    transition-delay: .6s;
+}
+#floating_menu button.hide-button:hover svg {
+scale: 1.2;
+}
+#floating_menu button.hide-button{
+    outline: none!important;
+    transition: background-color 500ms ease .3s, border-color 500ms ease .3s, color 500ms ease .3s, transform 300ms, right 300ms;
+}
+#floating_menu.hidenav button.hide-button.active:hover svg line{
+    transform: rotate(-180deg);
+    transition-delay: .1s;
+}
+
+
+#floating_menu button.hide-button::before {
+    content: "Open Menu" !important;
+    opacity: 0;
+    pointer-events: none;
+    padding: calc(var(--dotnav-padding, 12px) / 1.1) var(--dotnav-padding, 12px);
+    position: absolute;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%) translateX(calc(var(--dotnav-size, 40px) + var(--dotnav-arrow-width, 6px)));
+    max-width: -webkit-fill-available;
+    white-space: normal;
+    font-size: 12px;
+    letter-spacing: 0 !important;
+    text-align: center;
+    transition: all 300ms ease;
+    min-width: max-content;
+    font-weight: 500;
+    display: block !important;
+    left: auto;
+    right: 220%;
+    top: calc(var(--dotnav-padding, 12px) * -1.2);
+        top: 50%;
+
+    background: var(--dotnav-darkbg, #0f0f0ff0);
+    line-height: 1rem;
+    z-index: 1;
+    font-family: var(--dotnav-font);
+    letter-spacing: 0.05rem;
+    border-radius: var(--dotnav-tooltip-border-radius, 0);
+    color: white;
+        transition-delay: .2s;
+
+}
+
+
+#floating_menu button.hide-button::after {
+    content: "" !important;
+    opacity: 0;
+    pointer-events: none;
+    background: transparent;
+    position: absolute;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    transform: translateY(-50%) translateX(calc(var(--dotnav-size, 40px) + var(--dotnav-arrow-width, 6px)));
+    border-width: 0 calc(var(--dotnav-arrow-width, 6px)) var(--dotnav-arrow-width, 6px) calc(var(--dotnav-arrow-width, 6px));
+    border-color: transparent transparent var(--dotnav-darkbg, #0f0f0ff0) transparent;
+    right: calc((var(--dotnav-arrow-width, 6px) + var(--dotnav-padding, 12px)) * -1);
+    transition: all 300ms ease;
+    left: auto;
+    right: 100%;
+        transform: rotate(90deg);
+
+    transition-delay: .2s;
+
+}
+
+#floating_menu.hidenav button.hide-button:hover::before,
+#floating_menu.hidenav button.hide-button:hover::after {
+    opacity: 1;
+}
