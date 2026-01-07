@@ -1,9 +1,9 @@
 === Floating Dot Navigation ===
 Contributors: satoshisea
-Tags: navigation, scroll, dots, sections, menu, one-page, floating, customizer, responsive
+Tags: navigation, scroll, dots, sections, menu
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.4.0
+Stable tag: 1.9.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -123,7 +123,7 @@ Yes! Users can click the X button at the bottom of the navigation to hide it. Th
 
 == Changelog ==
 
-= 1.4.0 =
+= 1.9.0 =
 * Major update: Complete Customizer overhaul with comprehensive customization options
 * Added controls for all CSS variables (colors, sizes, spacing, fonts, borders, effects)
 * Implemented export/import/reset functionality for settings

@@ -27,24 +27,24 @@ class Floating_DotNav_Settings_Control extends WP_Customize_Control {
             <div class="floating-dotnav-actions" style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
                 <button type="button" class="button button-secondary floating-dotnav-export" id="floating-dotnav-export-btn">
                     <span class="dashicons dashicons-download" style="vertical-align: middle; margin-right: 5px;"></span>
-                    <?php _e('Export Settings', 'floating-dotnav'); ?>
+                    <?php esc_html_e('Export Settings', 'floating-dot-navigation'); ?>
                 </button>
                 
                 <button type="button" class="button button-secondary floating-dotnav-import" id="floating-dotnav-import-btn">
                     <span class="dashicons dashicons-upload" style="vertical-align: middle; margin-right: 5px;"></span>
-                    <?php _e('Import Settings', 'floating-dotnav'); ?>
+                    <?php esc_html_e('Import Settings', 'floating-dot-navigation'); ?>
                 </button>
                 
                 <button type="button" class="button button-secondary floating-dotnav-reset" id="floating-dotnav-reset-btn" style="color: #b32d2e;">
                     <span class="dashicons dashicons-update" style="vertical-align: middle; margin-right: 5px;"></span>
-                    <?php _e('Reset to Defaults', 'floating-dotnav'); ?>
+                    <?php esc_html_e('Reset to Defaults', 'floating-dot-navigation'); ?>
                 </button>
             </div>
             
             <div class="floating-dotnav-import-wrapper" id="floating-dotnav-import-wrapper" style="display: none; margin-top: 10px;">
                 <input type="file" accept=".txt" id="floating-dotnav-file-input" style="margin-bottom: 10px;">
                 <p class="description" style="margin-top: 5px;">
-                    <?php _e('Select a settings file to import.', 'floating-dotnav'); ?>
+                    <?php esc_html_e('Select a settings file to import.', 'floating-dot-navigation'); ?>
                 </p>
             </div>
             

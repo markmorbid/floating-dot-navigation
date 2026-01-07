@@ -1,10 +1,10 @@
 <?php
 /**
  * Plugin Name: Floating Dot Navigation
- * Plugin URI: https://satoshisea.io/
+ * Plugin URI: https://github.com/markmorbid/floating-dot-navigation
  * Description: Automated dot navigation that responds to page sections with class '.snap-section'
  * Version: 1.9.0
- * Requires at least: 6.9
+ * Requires at least: 5.0
  * Tested up to: 6.9
  * Author: Marcos Ribero
  * Author URI: https://satoshisea.io/
@@ -92,10 +92,10 @@ class Floating_Dot_Navigation {
         wp_localize_script('floating-dotnav-customizer-js', 'floatingDotNavCustomizer', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce('floating_dotnav_nonce'),
-            'exportSuccess' => __('Settings exported successfully!', 'floating-dotnav'),
-            'importSuccess' => __('Settings imported successfully!', 'floating-dotnav'),
-            'resetSuccess' => __('Settings reset to defaults!', 'floating-dotnav'),
-            'error' => __('An error occurred. Please try again.', 'floating-dotnav'),
+            'exportSuccess' => __('Settings exported successfully!', 'floating-dot-navigation'),
+            'importSuccess' => __('Settings imported successfully!', 'floating-dot-navigation'),
+            'resetSuccess' => __('Settings reset to defaults!', 'floating-dot-navigation'),
+            'error' => __('An error occurred. Please try again.', 'floating-dot-navigation'),
         ));
 
         // Add the CSS inline
@@ -260,7 +260,7 @@ class Floating_Dot_Navigation {
             }
         ";
         
-        wp_register_style('floating-dotnav-customizer-styles', false);
+        wp_register_style('floating-dotnav-customizer-styles', false, array(), FLOATING_DOTNAV_VERSION);
         wp_enqueue_style('floating-dotnav-customizer-styles');
         wp_add_inline_style('floating-dotnav-customizer-styles', $customizer_css);
     }
@@ -305,16 +305,16 @@ class Floating_Dot_Navigation {
     public function get_theme_variable_suggestions() {
         // Common theme CSS variables that might be available
         $suggestions = array(
-            '--maincolor' => __('Theme Primary Color', 'floating-dotnav'),
-            '--altcolor' => __('Theme Secondary Color', 'floating-dotnav'),
-            '--titlefont' => __('Theme Title Font', 'floating-dotnav'),
-            '--bodyfont' => __('Theme Body Font', 'floating-dotnav'),
-            '--border-radius' => __('Theme Border Radius', 'floating-dotnav'),
-            '--btn-border-radius' => __('Theme Button Border Radius', 'floating-dotnav'),
-            '--borders-color' => __('Theme Border Color', 'floating-dotnav'),
-            '--lightbg2' => __('Theme Light Background', 'floating-dotnav'),
-            '--maincolortext' => __('Theme Primary Text Color', 'floating-dotnav'),
-            '--wp-admin-theme-color' => __('WordPress Admin Theme Color', 'floating-dotnav'),
+            '--maincolor' => __('Theme Primary Color', 'floating-dot-navigation'),
+            '--altcolor' => __('Theme Secondary Color', 'floating-dot-navigation'),
+            '--titlefont' => __('Theme Title Font', 'floating-dot-navigation'),
+            '--bodyfont' => __('Theme Body Font', 'floating-dot-navigation'),
+            '--border-radius' => __('Theme Border Radius', 'floating-dot-navigation'),
+            '--btn-border-radius' => __('Theme Button Border Radius', 'floating-dot-navigation'),
+            '--borders-color' => __('Theme Border Color', 'floating-dot-navigation'),
+            '--lightbg2' => __('Theme Light Background', 'floating-dot-navigation'),
+            '--maincolortext' => __('Theme Primary Text Color', 'floating-dot-navigation'),
+            '--wp-admin-theme-color' => __('WordPress Admin Theme Color', 'floating-dot-navigation'),
         );
         
         return $suggestions;
@@ -371,7 +371,7 @@ class Floating_Dot_Navigation {
     public function customize_register($wp_customize) {
         // Add Section
         $wp_customize->add_section('floating_dotnav_section', array(
-            'title' => __('Floating Dot Navigation', 'floating-dotnav'),
+            'title' => __('Floating Dot Navigation', 'floating-dot-navigation'),
             'priority' => 160,
         ));
         
@@ -383,13 +383,13 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control('floating_dotnav_display', array(
-            'label' => __('Display Location', 'floating-dotnav'),
+            'label' => __('Display Location', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
             'type' => 'select',
             'choices' => array(
-                'homepage' => __('Homepage Only', 'floating-dotnav'),
-                'selected_pages' => __('Selected Pages', 'floating-dotnav'),
-                'all' => __('All Pages', 'floating-dotnav'),
+                'homepage' => __('Homepage Only', 'floating-dot-navigation'),
+                'selected_pages' => __('Selected Pages', 'floating-dot-navigation'),
+                'all' => __('All Pages', 'floating-dot-navigation'),
             ),
         ));
         
@@ -400,8 +400,8 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control('floating_dotnav_pages', array(
-            'label' => __('Selected Page IDs', 'floating-dotnav'),
-            'description' => __('Enter page IDs separated by commas (e.g., 10, 25, 42). Only used when "Selected Pages" is chosen.', 'floating-dotnav'),
+            'label' => __('Selected Page IDs', 'floating-dot-navigation'),
+            'description' => __('Enter page IDs separated by commas (e.g., 10, 25, 42). Only used when "Selected Pages" is chosen.', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
             'type' => 'text',
         ));
@@ -413,8 +413,8 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control('floating_dotnav_header_offset', array(
-            'label' => __('Header Offset (px)', 'floating-dotnav'),
-            'description' => __('If your page has a fixed header, enter its height in pixels so that the scrolling is accurate. Leave it at 0 if you do not have a fixed header.', 'floating-dotnav'),
+            'label' => __('Header Offset (px)', 'floating-dot-navigation'),
+            'description' => __('If your page has a fixed header, enter its height in pixels so that the scrolling is accurate. Leave it at 0 if you do not have a fixed header.', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
             'type' => 'number',
             'input_attrs' => array(
@@ -430,14 +430,15 @@ class Floating_Dot_Navigation {
             'sanitize_callback' => 'sanitize_text_field',
         ));
         
-        $font_desc = __('Enter font family (e.g., "Arial", "Roboto", or CSS variable like "var(--titlefont)"). Leave empty to use theme default.', 'floating-dotnav');
+        $font_desc = __('Enter font family (e.g., "Arial", "Roboto", or CSS variable like "var(--titlefont)"). Leave empty to use theme default.', 'floating-dot-navigation');
         $theme_vars = $this->get_theme_variable_suggestions();
         if (isset($theme_vars['--titlefont'])) {
-            $font_desc .= ' ' . sprintf(__('Theme variable available: %s', 'floating-dotnav'), '<code>var(--titlefont)</code>');
+            /* translators: %s: CSS variable name */
+            $font_desc .= ' ' . sprintf(__('Theme variable available: %s', 'floating-dot-navigation'), '<code>var(--titlefont)</code>');
         }
         
         $wp_customize->add_control('floating_dotnav_font', array(
-            'label' => __('Font Family', 'floating-dotnav'),
+            'label' => __('Font Family', 'floating-dot-navigation'),
             'description' => $font_desc,
             'section' => 'floating_dotnav_section',
             'type' => 'text',
@@ -450,8 +451,8 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control('floating_dotnav_size_font', array(
-            'label' => __('Tooltip Font Size', 'floating-dotnav'),
-            'description' => __('Font size for tooltip text (e.g., 16px, 1rem).', 'floating-dotnav'),
+            'label' => __('Tooltip Font Size', 'floating-dot-navigation'),
+            'description' => __('Font size for tooltip text (e.g., 16px, 1rem).', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
             'type' => 'text',
         ));
@@ -464,8 +465,8 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control('floating_dotnav_size', array(
-            'label' => __('Dot Size', 'floating-dotnav'),
-            'description' => __('Size of the navigation dots (e.g., 33px, 2rem).', 'floating-dotnav'),
+            'label' => __('Dot Size', 'floating-dot-navigation'),
+            'description' => __('Size of the navigation dots (e.g., 33px, 2rem).', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
             'type' => 'text',
         ));
@@ -477,8 +478,8 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control('floating_dotnav_arrow_width', array(
-            'label' => __('Tooltip Arrow Width', 'floating-dotnav'),
-            'description' => __('Width of the tooltip arrow triangle (e.g., 6px).', 'floating-dotnav'),
+            'label' => __('Tooltip Arrow Width', 'floating-dot-navigation'),
+            'description' => __('Width of the tooltip arrow triangle (e.g., 6px).', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
             'type' => 'text',
         ));
@@ -490,8 +491,8 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control('floating_dotnav_arrow_border', array(
-            'label' => __('Tooltip Arrow Border', 'floating-dotnav'),
-            'description' => __('Border width for tooltip arrow (should match arrow width if tooltip has border).', 'floating-dotnav'),
+            'label' => __('Tooltip Arrow Border', 'floating-dot-navigation'),
+            'description' => __('Border width for tooltip arrow (should match arrow width if tooltip has border).', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
             'type' => 'text',
         ));
@@ -504,8 +505,8 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control('floating_dotnav_space', array(
-            'label' => __('Space Between Dots', 'floating-dotnav'),
-            'description' => __('Vertical spacing between navigation dots (e.g., 7px).', 'floating-dotnav'),
+            'label' => __('Space Between Dots', 'floating-dot-navigation'),
+            'description' => __('Vertical spacing between navigation dots (e.g., 7px).', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
             'type' => 'text',
         ));
@@ -517,8 +518,8 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control('floating_dotnav_padding', array(
-            'label' => __('Tooltip Padding', 'floating-dotnav'),
-            'description' => __('Internal padding for tooltips (e.g., 12px).', 'floating-dotnav'),
+            'label' => __('Tooltip Padding', 'floating-dot-navigation'),
+            'description' => __('Internal padding for tooltips (e.g., 12px).', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
             'type' => 'text',
         ));
@@ -530,14 +531,15 @@ class Floating_Dot_Navigation {
             'sanitize_callback' => 'sanitize_hex_color',
         ));
         
-        $maincolor_desc = __('Primary accent color for active dots and tooltips. Leave empty to use theme color.', 'floating-dotnav');
+        $maincolor_desc = __('Primary accent color for active dots and tooltips. Leave empty to use theme color.', 'floating-dot-navigation');
         $theme_vars = $this->get_theme_variable_suggestions();
         if (isset($theme_vars['--maincolor'])) {
-            $maincolor_desc .= ' ' . sprintf(__('Theme variable available: %s', 'floating-dotnav'), '<code>var(--maincolor)</code>');
+            /* translators: %s: CSS variable name */
+            $maincolor_desc .= ' ' . sprintf(__('Theme variable available: %s', 'floating-dot-navigation'), '<code>var(--maincolor)</code>');
         }
         
         $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'floating_dotnav_maincolor', array(
-            'label' => __('Main Accent Color', 'floating-dotnav'),
+            'label' => __('Main Accent Color', 'floating-dot-navigation'),
             'description' => $maincolor_desc,
             'section' => 'floating_dotnav_section',
         )));
@@ -549,8 +551,8 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'floating_dotnav_maincolortext', array(
-            'label' => __('Main Color Text', 'floating-dotnav'),
-            'description' => __('Text color for tooltips. Auto-calculated for contrast if left empty.', 'floating-dotnav'),
+            'label' => __('Main Color Text', 'floating-dot-navigation'),
+            'description' => __('Text color for tooltips. Auto-calculated for contrast if left empty.', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
         )));
         
@@ -561,8 +563,8 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'floating_dotnav_altcolor', array(
-            'label' => __('Alternative Color', 'floating-dotnav'),
-            'description' => __('Alternative accent color. Uses main color if not set.', 'floating-dotnav'),
+            'label' => __('Alternative Color', 'floating-dot-navigation'),
+            'description' => __('Alternative accent color. Uses main color if not set.', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
         )));
         
@@ -573,8 +575,8 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'floating_dotnav_border_color', array(
-            'label' => __('Border Color', 'floating-dotnav'),
-            'description' => __('Color for borders on dots and tooltips.', 'floating-dotnav'),
+            'label' => __('Border Color', 'floating-dot-navigation'),
+            'description' => __('Color for borders on dots and tooltips.', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
         )));
         
@@ -585,8 +587,8 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'floating_dotnav_lightbg', array(
-            'label' => __('Light Background', 'floating-dotnav'),
-            'description' => __('Light background color for general use.', 'floating-dotnav'),
+            'label' => __('Light Background', 'floating-dot-navigation'),
+            'description' => __('Light background color for general use.', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
         )));
         
@@ -597,8 +599,8 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'floating_dotnav_darkbg', array(
-            'label' => __('Dark Background', 'floating-dotnav'),
-            'description' => __('Dark background color for dots and tooltips.', 'floating-dotnav'),
+            'label' => __('Dark Background', 'floating-dot-navigation'),
+            'description' => __('Dark background color for dots and tooltips.', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
         )));
         
@@ -609,8 +611,8 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'floating_dotnav_outline_color', array(
-            'label' => __('Outline Color (Active)', 'floating-dotnav'),
-            'description' => __('Color for the inner outline on active dots. Uses main color if not set.', 'floating-dotnav'),
+            'label' => __('Outline Color (Active)', 'floating-dot-navigation'),
+            'description' => __('Color for the inner outline on active dots. Uses main color if not set.', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
         )));
         
@@ -621,8 +623,8 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'floating_dotnav_outline_color_hover', array(
-            'label' => __('Outline Color (Hover)', 'floating-dotnav'),
-            'description' => __('Color for the inner outline on hover state.', 'floating-dotnav'),
+            'label' => __('Outline Color (Hover)', 'floating-dot-navigation'),
+            'description' => __('Color for the inner outline on hover state.', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
         )));
         
@@ -634,8 +636,8 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control('floating_dotnav_border_width', array(
-            'label' => __('Border Width', 'floating-dotnav'),
-            'description' => __('Width of borders on dots and tooltips (e.g., 1px, 2px).', 'floating-dotnav'),
+            'label' => __('Border Width', 'floating-dot-navigation'),
+            'description' => __('Width of borders on dots and tooltips (e.g., 1px, 2px).', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
             'type' => 'text',
         ));
@@ -647,15 +649,15 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control('floating_dotnav_border_style', array(
-            'label' => __('Border Style', 'floating-dotnav'),
-            'description' => __('Border style (solid, dashed, dotted, none).', 'floating-dotnav'),
+            'label' => __('Border Style', 'floating-dot-navigation'),
+            'description' => __('Border style (solid, dashed, dotted, none).', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
             'type' => 'select',
             'choices' => array(
-                'solid' => __('Solid', 'floating-dotnav'),
-                'dashed' => __('Dashed', 'floating-dotnav'),
-                'dotted' => __('Dotted', 'floating-dotnav'),
-                'none' => __('None', 'floating-dotnav'),
+                'solid' => __('Solid', 'floating-dot-navigation'),
+                'dashed' => __('Dashed', 'floating-dot-navigation'),
+                'dotted' => __('Dotted', 'floating-dot-navigation'),
+                'none' => __('None', 'floating-dot-navigation'),
             ),
         ));
         
@@ -665,14 +667,15 @@ class Floating_Dot_Navigation {
             'sanitize_callback' => 'sanitize_text_field',
         ));
         
-        $radius_desc = __('Border radius for dots (e.g., 100px for round, 5px for slight rounding, 0 for square).', 'floating-dotnav');
+        $radius_desc = __('Border radius for dots (e.g., 100px for round, 5px for slight rounding, 0 for square).', 'floating-dot-navigation');
         $theme_vars = $this->get_theme_variable_suggestions();
         if (isset($theme_vars['--btn-border-radius'])) {
-            $radius_desc .= ' ' . sprintf(__('Theme variable available: %s', 'floating-dotnav'), '<code>var(--btn-border-radius)</code>');
+            /* translators: %s: CSS variable name */
+            $radius_desc .= ' ' . sprintf(__('Theme variable available: %s', 'floating-dot-navigation'), '<code>var(--btn-border-radius)</code>');
         }
         
         $wp_customize->add_control('floating_dotnav_border_radius', array(
-            'label' => __('Border Radius (Dots)', 'floating-dotnav'),
+            'label' => __('Border Radius (Dots)', 'floating-dot-navigation'),
             'description' => $radius_desc,
             'section' => 'floating_dotnav_section',
             'type' => 'text',
@@ -685,8 +688,8 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control('floating_dotnav_tooltip_border_radius', array(
-            'label' => __('Tooltip Border Radius', 'floating-dotnav'),
-            'description' => __('Border radius for tooltips. Leave empty to use dot border radius if it\'s below 10px, otherwise uses 5px.', 'floating-dotnav'),
+            'label' => __('Tooltip Border Radius', 'floating-dot-navigation'),
+            'description' => __('Border radius for tooltips. Leave empty to use dot border radius if it\'s below 10px, otherwise uses 5px.', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
             'type' => 'text',
         ));
@@ -699,8 +702,8 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control('floating_dotnav_outline_size', array(
-            'label' => __('Outline Size', 'floating-dotnav'),
-            'description' => __('Size of the inner outline effect on dots (0 to disable, 1-10 for effect intensity).', 'floating-dotnav'),
+            'label' => __('Outline Size', 'floating-dot-navigation'),
+            'description' => __('Size of the inner outline effect on dots (0 to disable, 1-10 for effect intensity).', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
             'type' => 'number',
             'input_attrs' => array(
@@ -717,13 +720,13 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control('floating_dotnav_trail', array(
-            'label' => __('Show Connecting Line', 'floating-dotnav'),
-            'description' => __('Display a line connecting all dots.', 'floating-dotnav'),
+            'label' => __('Show Connecting Line', 'floating-dot-navigation'),
+            'description' => __('Display a line connecting all dots.', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
             'type' => 'select',
             'choices' => array(
-                'solid' => __('Yes', 'floating-dotnav'),
-                'none' => __('No', 'floating-dotnav'),
+                'solid' => __('Yes', 'floating-dot-navigation'),
+                'none' => __('No', 'floating-dot-navigation'),
             ),
         ));
         
@@ -734,8 +737,8 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control('floating_dotnav_transition_time', array(
-            'label' => __('Transition Time', 'floating-dotnav'),
-            'description' => __('Animation transition duration (e.g., 500ms, 0.5s).', 'floating-dotnav'),
+            'label' => __('Transition Time', 'floating-dot-navigation'),
+            'description' => __('Animation transition duration (e.g., 500ms, 0.5s).', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
             'type' => 'text',
         ));
@@ -750,8 +753,8 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control(new Floating_DotNav_Settings_Control($wp_customize, 'floating_dotnav_settings_management', array(
-            'label' => __('Settings Management', 'floating-dotnav'),
-            'description' => __('Export your current settings, import from a file, or reset to defaults.', 'floating-dotnav'),
+            'label' => __('Settings Management', 'floating-dot-navigation'),
+            'description' => __('Export your current settings, import from a file, or reset to defaults.', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
         )));
         
@@ -762,8 +765,8 @@ class Floating_Dot_Navigation {
         ));
         
         $wp_customize->add_control('floating_dotnav_custom_css', array(
-            'label' => __('Custom CSS (Advanced)', 'floating-dotnav'),
-            'description' => __('Add custom CSS to override any styles. This will be applied after all other settings.', 'floating-dotnav'),
+            'label' => __('Custom CSS (Advanced)', 'floating-dot-navigation'),
+            'description' => __('Add custom CSS to override any styles. This will be applied after all other settings.', 'floating-dot-navigation'),
             'section' => 'floating_dotnav_section',
             'type' => 'textarea',
             'input_attrs' => array(
@@ -962,7 +965,7 @@ class Floating_Dot_Navigation {
             $r = hexdec(substr($lightbg_transp, 0, 2));
             $g = hexdec(substr($lightbg_transp, 2, 2));
             $b = hexdec(substr($lightbg_transp, 4, 2));
-            echo '    --dotnav-lightbg-transp: rgba(' . $r . ', ' . $g . ', ' . $b . ', 0.75);' . "\n";
+            echo '    --dotnav-lightbg-transp: rgba(' . esc_attr($r) . ', ' . esc_attr($g) . ', ' . esc_attr($b) . ', 0.75);' . "\n";
         }
         
         echo '}' . "\n";
@@ -970,7 +973,8 @@ class Floating_Dot_Navigation {
         // Custom CSS (advanced users)
         $custom_css = get_theme_mod('floating_dotnav_custom_css', '');
         if (!empty($custom_css)) {
-            echo "\n" . $custom_css . "\n";
+            // CSS is already sanitized in sanitize_custom_css, but we still need to escape for output
+            echo "\n" . wp_kses_post($custom_css) . "\n";
         }
         
         echo '</style>' . "\n";
@@ -983,7 +987,7 @@ class Floating_Dot_Navigation {
         check_ajax_referer('floating_dotnav_nonce', 'nonce');
         
         if (!current_user_can('customize')) {
-            wp_send_json_error(array('message' => __('Insufficient permissions.', 'floating-dotnav')));
+            wp_send_json_error(array('message' => __('Insufficient permissions.', 'floating-dot-navigation')));
         }
         
         $settings = array();
@@ -1025,7 +1029,7 @@ class Floating_Dot_Navigation {
         
         wp_send_json_success(array(
             'settings' => $settings,
-            'filename' => 'floating-dotnav-settings-' . date('Y-m-d') . '.txt'
+            'filename' => 'floating-dotnav-settings-' . gmdate('Y-m-d') . '.txt'
         ));
     }
     
@@ -1036,19 +1040,19 @@ class Floating_Dot_Navigation {
         check_ajax_referer('floating_dotnav_nonce', 'nonce');
         
         if (!current_user_can('customize')) {
-            wp_send_json_error(array('message' => __('Insufficient permissions.', 'floating-dotnav')));
+            wp_send_json_error(array('message' => __('Insufficient permissions.', 'floating-dot-navigation')));
         }
         
-        $settings_json = isset($_POST['settings']) ? wp_unslash($_POST['settings']) : '';
+        $settings_json = isset($_POST['settings']) ? sanitize_textarea_field(wp_unslash($_POST['settings'])) : '';
         
         if (empty($settings_json)) {
-            wp_send_json_error(array('message' => __('No settings data provided.', 'floating-dotnav')));
+            wp_send_json_error(array('message' => __('No settings data provided.', 'floating-dot-navigation')));
         }
         
         $settings = json_decode($settings_json, true);
         
         if (json_last_error() !== JSON_ERROR_NONE || !is_array($settings)) {
-            wp_send_json_error(array('message' => __('Invalid settings format.', 'floating-dotnav')));
+            wp_send_json_error(array('message' => __('Invalid settings format.', 'floating-dot-navigation')));
         }
         
         $allowed_settings = array(
@@ -1086,7 +1090,7 @@ class Floating_Dot_Navigation {
             }
         }
         
-        wp_send_json_success(array('message' => __('Settings imported successfully!', 'floating-dotnav')));
+        wp_send_json_success(array('message' => __('Settings imported successfully!', 'floating-dot-navigation')));
     }
     
     /**
@@ -1096,7 +1100,7 @@ class Floating_Dot_Navigation {
         check_ajax_referer('floating_dotnav_nonce', 'nonce');
         
         if (!current_user_can('customize')) {
-            wp_send_json_error(array('message' => __('Insufficient permissions.', 'floating-dotnav')));
+            wp_send_json_error(array('message' => __('Insufficient permissions.', 'floating-dot-navigation')));
         }
         
         $defaults = array(
@@ -1132,7 +1136,7 @@ class Floating_Dot_Navigation {
             set_theme_mod($key, $value);
         }
         
-        wp_send_json_success(array('message' => __('Settings reset to defaults!', 'floating-dotnav')));
+        wp_send_json_success(array('message' => __('Settings reset to defaults!', 'floating-dot-navigation')));
     }
 }
 
